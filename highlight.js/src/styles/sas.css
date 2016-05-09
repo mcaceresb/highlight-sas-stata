@@ -3,6 +3,8 @@ Description: SAS style for highlight.js
 Author: github.com/mcaceresb
 Version: 0.1
 Date: 2016-05-08
+Note: This is not meant to be a complete style. It's merely meant to
+      mimic SAS' program editor syntax highlighting.
 */
 
 .hljs {

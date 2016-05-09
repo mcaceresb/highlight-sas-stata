@@ -3,10 +3,9 @@
     pygments.styles.sas
     ~~~~~~~~~~~~~~~~~~~
 
-    Style inspired by SAS' enhanced program editor
-
-    :copyright: Copyright 2006-2016 by the Pygments team, see AUTHORS.
-    :license: BSD, see LICENSE for details.
+    Style inspired by SAS' enhanced program editor. Note This is not
+    meant to be a complete style. It's merely meant to mimic SAS'
+    program editor syntax highlighting.
 """
 
 from pygments.style import Style
@@ -16,7 +15,9 @@ from pygments.token import Keyword, Name, Comment, String, Error, \
 
 class SasStyle(Style):
     """
-    Style inspired by SAS' enhanced program editor
+    Style inspired by SAS' enhanced program editor. Note This is not
+    meant to be a complete style. It's merely meant to mimic SAS'
+    program editor syntax highlighting.
     """
 
     default_style = ''

@@ -3,10 +3,9 @@
     pygments.styles.stata
     ~~~~~~~~~~~~~~~~~~~~~
 
-    Style inspired by Stata's do-file editor
-
-    :copyright: Copyright 2006-2016 by the Pygments team, see AUTHORS.
-    :license: BSD, see LICENSE for details.
+    Style inspired by Stata's do-file editor. Note this is not meant
+    to be a complete style. It's merely meant to mimic Stata's do file
+    editor syntax highlighting.
 """
 
 from pygments.style import Style
@@ -16,7 +15,9 @@ from pygments.token import Keyword, Name, Comment, String, Error, \
 
 class StataStyle(Style):
     """
-    Style inspired by Stata's do-file editor
+    Style inspired by Stata's do-file editor. Note this is not meant
+    to be a complete style. It's merely meant to mimic Stata's do file
+    editor syntax highlighting.
     """
 
     default_style = ''

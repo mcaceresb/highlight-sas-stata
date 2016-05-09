@@ -1,9 +1,10 @@
 " ----------------------------------------------------------------------------
-" Program: tex_fenced.vim
+" Program: latex-fenced-languages.vim
 " Author:  github.com/mcaceresb
 " Created: Sat May  7 19:23:06 EDT 2016
 " Updated: Sun May  8 21:21:07 EDT 2016
 " Purpose: Nested highlighting in LaTeX with minted and listings
+" Usage:   From vim, run :so latex-fenced-languages.vim<CR>
 
 " ---------------------------------------------------------------------
 " Based on Tim Pope's vim-markdown (https://github.com/tpope/vim-markdown)

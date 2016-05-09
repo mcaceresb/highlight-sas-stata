@@ -1,5 +1,5 @@
 % ---------------------------------------------------------------------
-% Program: lstsas.tex
+% Program: lststata.tex
 % Author:  github.com/mcaceresb
 % Created: Sat May  7 19:23:06 EDT 2016
 % Updated: Sun May  8 22:25:39 EDT 2016
@@ -11,6 +11,13 @@
 % - http://fmwww.bc.edu/RePEc/bocode/s/synlightlist.ado
 
 \RequirePackage{listings}
+\RequirePackage{color}
+\RequirePackage[svgnames]{xcolor}
+\definecolor{spRed}{HTML}{BE646C}
+
+% ---------------------------------------------------------------------
+% Stata language definition
+
 \lstdefinelanguage{stata}{
   sensitive=true,
   %
@@ -292,9 +299,6 @@
   },
   %
   % Built-in functions
-  % https://github.com/isagalaev/highlight.js/blob/master/src/languages/stata.js
-  % https://github.com/jpitblado/vim-stata/blob/master/syntax/stata.vim
-  % http://fmwww.bc.edu/RePEc/bocode/s/synlightlist.ado
   morekeywords=[3]{
     Cdhms ,Chms ,Clock ,Cmdyhms ,Cofc ,Cofd ,F ,Fden ,Ftail ,I ,J
     ,_caller ,abbrev ,abs ,acos ,acosh ,asin ,asinh ,atan ,atan2
@@ -347,33 +351,29 @@
 % ---------------------------------------------------------------------
 % Stata editor style
 
-\RequirePackage{color}
-\RequirePackage[svgnames]{xcolor}
-\definecolor{spRed}{HTML}{BE646C}
 \providecommand{\textcolordummy}[2]{#2}
-
 \lstalias{Stata}{stata}
 \lstdefinestyle{stata-editor}{
-    language=stata,
-    %
-    % Global variables
-    keywordstyle={\bfseries\color{spRed}},
-    %
-    % Add-ons system commands
-    keywordstyle=[2]{\bfseries\color{NavyBlue}},
-    %
-    % Built-in functions
-    keywordstyle=[3]{\color{blue}},
-    %
-    % Numbers
-    keywordstyle=[4]{\color{blue}},
-    %
-    % User macros (variables)
-    keywordstyle = [9]{\bfseries\color{LightSteelBlue}\let\textcolor\textcolordummy},
-    %
-    % Strings and comments
-    stringstyle  = \color{Maroon},
-    commentstyle = \color{Green}\slshape,
+  language=stata,
+  %
+  % Global variables
+  keywordstyle={\bfseries\color{spRed}},
+  %
+  % Add-ons system commands
+  keywordstyle=[2]{\bfseries\color{NavyBlue}},
+  %
+  % Built-in functions
+  keywordstyle=[3]{\color{blue}},
+  %
+  % Numbers
+  keywordstyle=[4]{\color{blue}},
+  %
+  % User macros (variables)
+  keywordstyle = [9]{\bfseries\color{LightSteelBlue}\let\textcolor\textcolordummy},
+  %
+  % Strings and comments
+  stringstyle  = \color{Maroon},
+  commentstyle = \color{Green}\slshape,
 }
 
 % ---------------------------------------------------------------------

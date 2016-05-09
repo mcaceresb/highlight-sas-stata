@@ -1,6 +1,6 @@
 /**********************************************************************
  * Program: example.sas
- * Purpose: SAS Example for HighlightJS Plug-in
+ * Purpose: SAS Example for highlighting engines
  **********************************************************************/
 
 %put Started at %sysfunc(putn(%sysfunc(datetime()), datetime.));
@@ -15,7 +15,6 @@ options
 systask command "mkdir -p &outdir." wait;
 libname main "&maindir." access = readonly;
 libname main "%maindir." access = readonly;
-libname main "`maindir." access = readonly;
 
 data testing;
     input name $ number delimiter = ",";

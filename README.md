@@ -11,7 +11,7 @@ This repo contains SAS and Stata highlighting implementations for
 - [Listings](http://tug.ctan.org/tex-archive/macros/latex/contrib/listings/), a LaTeX implementation of syntax highlighting.
 - [Highlight.js](https://github.com/isagalaev/highlight.js), a syntax highlighter written in JavaScript.
 
-This project started with me using `listings` and `minted` from LaTeX. Since I code in `vim`, I also wrote a short script to highlight code in LaTeX using the appropriate `syntax/<lang>.vim`. In this case, simply `:so lib/tex_fenced.vim` from vim.
+This project started with me using `listings` and `minted` from LaTeX. Since I code in `vim`, I also wrote a short script to highlight code in LaTeX using the appropriate `syntax/<lang>.vim`. In this case, simply `:so lib/latex-fenced-languages.vim` from vim.
 
 ### [Minted](https://github.com/gpoore/minted) and [Pygments](https://bitbucket.org/birkenfeld/pygments-main)
 

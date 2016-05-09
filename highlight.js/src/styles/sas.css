@@ -1,0 +1,63 @@
+/*
+Description: SAS style for highlight.js
+Author: github.com/mcaceresb
+Version: 0.1
+Date: 2016-05-08
+*/
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #f0f0f0;
+}
+
+.hljs-comment {
+    font-style: italic;
+    color: #008800;
+}
+
+.hljs-string {
+    color: #800080;
+}
+
+.hljs-number {
+    font-weight: bold;
+    color: #2e8b57;
+}
+
+.hljs-emphasis {
+    background: #ffffe0;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+.hljs-meta {
+    color: #2c2cff;
+}
+
+.hljs-keyword {
+    color: #353580;
+    font-weight: bold;
+}
+
+.hljs-variable {
+    color: #2c2cff;
+    font-weight: bold;
+}
+
+.hljs-literal {
+    color: #2c2cff;
+    font-weight: bold;
+}
+
+.hljs-built_in {
+    color: #2c2cff;
+}
+
+.hljs-name {
+    font-weight: bold;
+    font-style: italic;
+}

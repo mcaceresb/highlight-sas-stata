@@ -1,0 +1,53 @@
+/*
+Description: Stata style for highlight.js
+Author: github.com/mcaceresb
+Version: 0.1
+Date: 2016-05-08
+*/
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #f0f0f0;
+}
+
+.hljs-comment {
+    font-style: italic;
+    color: #008800;
+}
+
+.hljs-string {
+    color: #7a2424;
+}
+
+.hljs-number {
+    color: #2c2cff;
+}
+
+.hljs-keyword {
+    color: #353580;
+    font-weight: bold;
+}
+
+.hljs-symbol {
+    color: #35baba;
+    font-weight: bold;
+}
+
+.hljs-variable {
+    color: #b5565e;
+    font-weight: bold;
+}
+
+.hljs-built_in {
+    color: #2c2cff;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}

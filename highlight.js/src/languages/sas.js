@@ -1,6 +1,6 @@
 /*
 Language: SAS
-Author: github.com/mcaceresb
+Author: Mauricio Caceres <mauricio.caceres.bravo@gmail.com>
 Description: Syntax Highlighting for SAS
 */
 

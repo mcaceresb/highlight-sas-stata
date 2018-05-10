@@ -7,7 +7,9 @@ Implementations
 ---------------
 
 This repo contains SAS and Stata highlighting implementations for
+
 - [Pygments](https://bitbucket.org/birkenfeld/pygments-main), a syntax highlighter written in python. I wrote this to use with [minted](https://github.com/gpoore/minted), a LaTeX code highlighter uses pygments.
+- [Pandoc](http://pandoc.org), a document converter that converts [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) into a wide array of formats. The syntax highlighting works for PDF, DOCX, and HTML output.
 - [Listings](http://tug.ctan.org/tex-archive/macros/latex/contrib/listings/), a LaTeX implementation of syntax highlighting.
 - [Highlight.js](https://github.com/isagalaev/highlight.js), a syntax highlighter written in JavaScript. (SAS only; Stata was already available).
 
@@ -18,6 +20,35 @@ This project started with me using `listings` and `minted` from LaTeX. Since I c
 [Minted](https://github.com/gpoore/minted) is a LaTeX package that uses [pygments](https://bitbucket.org/birkenfeld/pygments-main) to highlight code. Pygments is quite complex and has a lot of options, but this means highlighting here should be free of any issues. I added sas.py and stata.py styles to match the SAS and Stata editors (styles are just a list of types and colors, so defining them is quite easy).
 
 The pull request was accepted into the main branch for pygments 2.2; you can try highlighting code on [the pygments project website](http://pygments.org).
+
+### [Pandoc](http://pandoc.org)
+
+The XML files to highlight Stata and SAS are [here for Stata](xml/stata.xml) and
+[here for SAS](xml/sas.xml). To use them with Pandoc, supply them with the
+`--syntax-definitions` option on the command line.
+
+```
+pandoc document_with_stata.md -o document_with_stata.pdf --syntax-definition=stata.xml
+```
+
+The example file at [lib/test/test.md](lib/test/test.md) can be compiled into [lib/test/test_pandoc.pdf](lib/test/test_pandoc.pdf) with
+```
+pandoc lib/test/test.md \
+    -o lib/test/test_pandoc.pdf \
+    --syntax-definition=xml/stata.xml \
+    --syntax-definition=xml/sas.xml
+```
+
+or compiled into [lib/test/test_pandoc.docx](lib/test/test_pandoc.docx) with
+
+```
+pandoc lib/test/test.md \
+    -o lib/test/test_pandoc.docx \
+    --syntax-definition=xml/stata.xml \
+    --syntax-definition=xml/sas.xml
+```
+
+Note that this requires Pandoc 2.0 or higher.
 
 ### [Listings](http://tug.ctan.org/tex-archive/macros/latex/contrib/listings)
 

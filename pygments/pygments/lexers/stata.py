@@ -102,28 +102,15 @@ class StataLexer(RegexLexer):
         'string-compound': [
             (r'`"', String, '#push'),
             (r'"\'', String, '#pop'),
+            include('macros'),
+            (r'\\\\|\\"|\\\n', String.Escape),
             (r'.', String)
         ],
         'string-regular': [
             (r'(")(?!\')|(?=\n)', String, '#pop'),
+            include('macros'),
+            (r'\\\\|\\"|\\\n', String.Escape),
             (r'.', String)
-        ],
-        # For either string type, highlight macros as macros
-        'string_dquote': [
-            (r'"', String, '#pop'),
-            (r'\\\\|\\"|\\\n', String.Escape),
-            (r'\$', Name.Variable.Global, 'var_validglobal'),
-            (r'`', Name.Variable, 'var_validlocal'),
-            (r'[^$`"\\]+', String),
-            (r'[$"\\]', String),
-        ],
-        'string_mquote': [
-            (r'"\'', String, '#pop'),
-            (r'\\\\|\\"|\\\n', String.Escape),
-            (r'\$', Name.Variable.Global, 'var_validglobal'),
-            (r'`', Name.Variable, 'var_validlocal'),
-            (r'[^$`"\\]+', String),
-            (r'[$"\\]', String),
         ],
         # Built in functions and statements
         'keywords': [

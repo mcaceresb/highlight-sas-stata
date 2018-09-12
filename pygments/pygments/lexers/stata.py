@@ -114,7 +114,7 @@ class StataLexer(RegexLexer):
         ],
         # Built in functions and statements
         'keywords': [
-            (words(builtins_functions, prefix = r'\b', suffix = r'\('),
+            (words(builtins_functions, prefix = r'\b', suffix = r'(?=\()'),
              Name.Function),
             (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'\b'),
              Keyword),

@@ -39,6 +39,7 @@ class StataLexer(RegexLexer):
     tokens = {
         'root': [
             include('comments'),
+            include('strings'),
             include('vars-strings'),
             include('numbers'),
             include('keywords'),
@@ -84,6 +85,21 @@ class StataLexer(RegexLexer):
             (r'`\w{0,31}\'', Name.Variable),
             (r'"', String, 'string_dquote'),
             (r'`"', String, 'string_mquote'),
+        ],
+        'strings': [
+            # `"compound string"'
+            (r'`"', String, 'string-compound'),
+            # "string"
+            (r'(?<!`)"', String, 'string-regular'),
+        ],
+        'string-compound': [
+            (r'`"', String, '#push'),
+            (r'"\'', String, '#pop'),
+            (r'.', String)
+        ],
+        'string-regular': [
+            (r'(")(?!\')|(?=\n)', String, '#pop'),
+            (r'.', String)
         ],
         # For either string type, highlight macros as macros
         'string_dquote': [

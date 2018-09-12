@@ -40,7 +40,7 @@ class StataLexer(RegexLexer):
         'root': [
             include('comments'),
             include('strings'),
-            include('vars-strings'),
+            include('macros'),
             include('numbers'),
             include('keywords'),
             (r'.', Text),
@@ -79,12 +79,19 @@ class StataLexer(RegexLexer):
             (r'\n', Text, '#pop'),
             (r'.', Comment.Single),
         ],
-        # Global and local macros; regular and special strings
-        'vars-strings': [
-            (r'\$[\w{]', Name.Variable.Global, 'var_validglobal'),
-            (r'`\w{0,31}\'', Name.Variable),
-            (r'"', String, 'string_dquote'),
-            (r'`"', String, 'string_mquote'),
+        'macros': [
+            (r'\$', Name.Variable.Global, 'macro-global'),
+            (r'`', Name.Variable, 'macro-local'),
+        ],
+        'macro-global': [
+            (r'}', Name.Variable.Global, '#pop'),
+            (r'\w(?![\w}])', Name.Variable.Global, '#pop'),
+            (r'.', Name.Variable.Global),
+        ],
+        'macro-local': [
+            (r'`', Name.Variable, '#push'),
+            (r"'", Name.Variable, '#pop'),
+            (r'.', Name.Variable),
         ],
         'strings': [
             # `"compound string"'
@@ -117,13 +124,6 @@ class StataLexer(RegexLexer):
             (r'`', Name.Variable, 'var_validlocal'),
             (r'[^$`"\\]+', String),
             (r'[$"\\]', String),
-        ],
-        'var_validglobal': [
-            (r'\{\w{0,32}\}', Name.Variable.Global, '#pop'),
-            (r'\w{1,32}', Name.Variable.Global, '#pop'),
-        ],
-        'var_validlocal': [
-            (r'\w{0,31}\'', Name.Variable, '#pop'),
         ],
         # Built in functions and statements
         'keywords': [

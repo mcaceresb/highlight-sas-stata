@@ -40,9 +40,11 @@ class StataLexer(RegexLexer):
         'root': [
             include('comments'),
             include('strings'),
+            include('operators'),
             include('macros'),
             include('numbers'),
             include('keywords'),
+            include('format'),
             (r'.', Text),
         ],
         'comments': [

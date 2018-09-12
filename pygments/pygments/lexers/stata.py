@@ -9,6 +9,7 @@
     :license: BSD, see LICENSE for details.
 """
 
+import re
 from pygments.lexer import RegexLexer, include, words
 from pygments.token import Comment, Keyword, Name, Number, \
     String, Text, Operator
@@ -33,6 +34,7 @@ class StataLexer(RegexLexer):
     aliases   = ['stata', 'do']
     filenames = ['*.do', '*.ado']
     mimetypes = ['text/x-stata', 'text/stata', 'application/x-stata']
+    flags = re.MULTILINE | re.DOTALL
 
     tokens = {
         'root': [
@@ -41,6 +43,40 @@ class StataLexer(RegexLexer):
             include('numbers'),
             include('keywords'),
             (r'.', Text),
+        ],
+        'comments': [
+            (r'(^//|(?<=\s)//)(?!/)', Comment.Single, 'comments-double-slash'),
+            (r'^\s*\*', Comment.Single, 'comments-star'),
+            (r'/\*', Comment.Multiline, 'comments-block'),
+            (r'(^///|(?<=\s)///)', Comment.Special, 'comments-triple-slash')
+        ],
+        'comments-block': [
+            (r'/\*', Comment.Multiline, '#push'),
+            # this ends and restarts a comment block. but need to catch this so
+            # that it doesn\'t start _another_ level of comment blocks
+            (r'\*/\*', Comment.Multiline),
+            (r'(\*/\s+\*(?!/)[^\n]*)|(\*/)', Comment.Multiline, '#pop'),
+            # Match anything else as a character inside the comment
+            (r'.', Comment.Multiline),
+        ],
+        'comments-star': [
+            (r'///.*?\n', Comment.Single,
+                ('#pop', 'comments-triple-slash')),
+            (r'(^//|(?<=\s)//)(?!/)', Comment.Single,
+                ('#pop', 'comments-double-slash')),
+            (r'/\*', Comment.Multiline, 'comments-block'),
+            (r'.(?=\n)', Comment.Single, '#pop'),
+            (r'.', Comment.Single),
+        ],
+        'comments-triple-slash': [
+            (r'\n', Comment.Special, '#pop'),
+            # A // breaks out of a comment for the rest of the line
+            (r'//.*?(?=\n)', Comment.Single, '#pop'),
+            (r'.', Comment.Special),
+        ],
+        'comments-double-slash': [
+            (r'\n', Text, '#pop'),
+            (r'.', Comment.Single),
         ],
         # Global and local macros; regular and special strings
         'vars-strings': [
@@ -72,13 +108,6 @@ class StataLexer(RegexLexer):
         ],
         'var_validlocal': [
             (r'\w{0,31}\'', Name.Variable, '#pop'),
-        ],
-        # * only OK at line start, // OK anywhere
-        'comments': [
-            (r'^\s*\*.*$', Comment),
-            (r'//.*', Comment.Single),
-            (r'/\*.*?\*/', Comment.Multiline),
-            (r'/[*](.|\n)*?[*]/', Comment.Multiline),
         ],
         # Built in functions and statements
         'keywords': [

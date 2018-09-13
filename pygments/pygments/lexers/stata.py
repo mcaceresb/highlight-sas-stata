@@ -40,38 +40,72 @@ class StataLexer(RegexLexer):
             include('vars-strings'),
             include('numbers'),
             include('keywords'),
+            include('operators'),
+            include('format'),
             (r'.', Text),
         ],
         # Global and local macros; regular and special strings
         'vars-strings': [
-            (r'\$[\w{]', Name.Variable.Global, 'var_validglobal'),
-            (r'`\w{0,31}\'', Name.Variable),
             (r'"', String, 'string_dquote'),
             (r'`"', String, 'string_mquote'),
+            (r'\$(\{|(?=[\$`]))', Name.Variable.Global, 'var_nestedglobal'),
+            (r'\$', Name.Variable.Global, 'var_validglobal'),
+            (r'`', Name.Variable, 'var_anylocal'),
         ],
         # For either string type, highlight macros as macros
         'string_dquote': [
             (r'"', String, '#pop'),
             (r'\\\\|\\"|\\\n', String.Escape),
-            (r'\$', Name.Variable.Global, 'var_validglobal'),
-            (r'`', Name.Variable, 'var_validlocal'),
-            (r'[^$`"\\]+', String),
-            (r'[$"\\]', String),
+            (r'(?<!\\)\$(\{|(?=[\$`]))', Name.Variable.Global, 'var_nestedglobal'),
+            (r'(?<!\\)\$', Name.Variable.Global, 'var_validglobal'),
+            (r'(?<!\\)`', Name.Variable, 'var_anylocal'),
+            (r'.', String),
+            # (r'[^$`"\\]+', String),
+            # (r'[$"\\]', String),
         ],
         'string_mquote': [
             (r'"\'', String, '#pop'),
             (r'\\\\|\\"|\\\n', String.Escape),
+            (r'(?<!\\)\$(\{|(?=[\$`]))', Name.Variable.Global, 'var_nestedglobal'),
+            (r'(?<!\\)\$', Name.Variable.Global, 'var_validglobal'),
+            (r'(?<!\\)`', Name.Variable, 'var_anylocal'),
+            (r'.', String),
+            # (r'[^$`"\\]+', String),
+            # (r'[$"\\]', String),
+        ],
+        # A local is usually
+        #     `\w{0,31}'
+        #     `:extended macro'
+        #     `=expression'
+        #     `[rsen](results)'
+        #     `(++--)scalar(++--)'
+        #
+        # However, there are all sorts of weird rules wrt edge
+        # cases. Instead of writing 27 exceptions, anything inside
+        # `' is a local.
+        'var_anylocal': [
+            (r'`', Name.Variable, '#push'),
+            (r'\'', Name.Variable, '#pop'),
+            (r'\$(\{|(?=[\$`]))', Name.Variable.Global, 'var_nestedglobal'),
             (r'\$', Name.Variable.Global, 'var_validglobal'),
-            (r'`', Name.Variable, 'var_validlocal'),
-            (r'[^$`"\\]+', String),
-            (r'[$"\\]', String),
+            # (r'\w{0,31}\'', Name.Variable, '#pop'),
+            (r'.', Name.Variable),  # fallback
+        ],
+        # A global is more restricted, so we do follow rules. Note only
+        # locals explicitly enclosed ${} can be nested.
+        'var_nestedglobal': [
+            (r'\$\{', Name.Variable.Global, '#push'),
+            (r'\}', Name.Variable.Global, '#pop'),
+            (r'\$', Name.Variable.Global, 'var_validglobal'),
+            (r'`', Name.Variable, 'var_anylocal'),
+            (r'\w', Name.Variable.Global),  # fallback
+            (r'(?=[^\w])', Name.Variable.Global, '#pop'),
         ],
         'var_validglobal': [
-            (r'\{\w{0,32}\}', Name.Variable.Global, '#pop'),
+            (r'\$\{', Name.Variable.Global, 'var_nestedglobal', '#pop'),
+            (r'\$', Name.Variable.Global, 'var_validglobal', '#pop'),
+            (r'`', Name.Variable, 'var_anylocal', '#pop'),
             (r'\w{1,32}', Name.Variable.Global, '#pop'),
-        ],
-        'var_validlocal': [
-            (r'\w{0,31}\'', Name.Variable, '#pop'),
         ],
         # * only OK at line start, // OK anywhere
         'comments': [
@@ -82,9 +116,9 @@ class StataLexer(RegexLexer):
         ],
         # Built in functions and statements
         'keywords': [
-            (words(builtins_functions, prefix = r'\b', suffix = r'\('),
+            (words(builtins_functions, prefix = r'\b', suffix = r'(?=\()'),
              Name.Function),
-            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'\b'),
+            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'(?=\b)'),
              Keyword),
         ],
         # http://www.stata.com/help.cgi?operators
@@ -100,9 +134,9 @@ class StataLexer(RegexLexer):
         ],
         # Stata formats
         'format': [
-            (r'%-?\d{1,2}(\.\d{1,2})?[gfe]c?', Name.Variable),
-            (r'%(21x|16H|16L|8H|8L)', Name.Variable),
-            (r'%-?(tc|tC|td|tw|tm|tq|th|ty|tg).{0,32}', Name.Variable),
-            (r'%[-~]?\d{1,4}s', Name.Variable),
+            (r'%-?\d{1,2}(\.\d{1,2})?[gfe]c?', Name.Format),
+            (r'%(21x|16H|16L|8H|8L)', Name.Format),
+            (r'%-?(tc|tC|td|tw|tm|tq|th|ty|tg).{0,32}', Name.Format),
+            (r'%[-~]?\d{1,4}s', Name.Format),
         ]
     }

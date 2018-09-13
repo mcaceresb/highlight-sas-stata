@@ -1,0 +1,10 @@
+.in-prompt { color: #99bb88; }
+.in-prompt-number { font-weight: bold; }
+.out-prompt { color: #ff9090; }
+.out-prompt-number { font-weight: bold; }
+.inverted { background-color: white; color: #232629; }
+/* QPlainTextEdit, QTextEdit { */
+/*     background-color: #232629; */
+/*     opacity: 0.6; */
+/*     background-color: rgba(35, 38, 41, 0.6); */
+/* } */

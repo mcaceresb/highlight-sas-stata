@@ -37,6 +37,7 @@ adopath ++ "${lib}/code/ado/"
 cap adopath - SITE
 cap adopath - PLUS
 /*cap adopath - PERSONAL
+/*Nested*/
 cap adopath - OLDPLACE*/
 
 forval i = 1 / 4{

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #ffffcc }
+body  { background: #ffffff; }
+body .c { color: #008800; font-style: italic } /* Comment */
+body .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+body .g { color: #2c2cff } /* Generic */
+body .k { color: #2c2cff } /* Keyword */
+body .x { background-color: #ffffe0 } /* Other */
+body .ch { color: #008800; font-style: italic } /* Comment.Hashbang */
+body .cm { color: #008800; font-style: italic } /* Comment.Multiline */
+body .cp { color: #008800; font-style: italic } /* Comment.Preproc */
+body .cpf { color: #008800; font-style: italic } /* Comment.PreprocFile */
+body .c1 { color: #008800; font-style: italic } /* Comment.Single */
+body .cs { color: #008800; font-style: italic } /* Comment.Special */
+body .gd { color: #2c2cff } /* Generic.Deleted */
+body .ge { color: #008800 } /* Generic.Emph */
+body .gr { color: #d30202 } /* Generic.Error */
+body .gh { color: #2c2cff } /* Generic.Heading */
+body .gi { color: #2c2cff } /* Generic.Inserted */
+body .go { color: #2c2cff } /* Generic.Output */
+body .gp { color: #2c2cff } /* Generic.Prompt */
+body .gs { color: #2c2cff } /* Generic.Strong */
+body .gu { color: #2c2cff } /* Generic.Subheading */
+body .gt { color: #2c2cff } /* Generic.Traceback */
+body .kc { color: #2c2cff; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #2c2cff } /* Keyword.Declaration */
+body .kn { color: #2c2cff } /* Keyword.Namespace */
+body .kp { color: #2c2cff } /* Keyword.Pseudo */
+body .kr { color: #353580; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #2c2cff } /* Keyword.Type */
+body .m { color: #2e8b57; font-weight: bold } /* Literal.Number */
+body .s { color: #800080 } /* Literal.String */
+body .nb { color: #2c2cff } /* Name.Builtin */
+body .nf { font-weight: bold; font-style: italic } /* Name.Function */
+body .nv { color: #2c2cff; font-weight: bold } /* Name.Variable */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mb { color: #2e8b57; font-weight: bold } /* Literal.Number.Bin */
+body .mf { color: #2e8b57; font-weight: bold } /* Literal.Number.Float */
+body .mh { color: #2e8b57; font-weight: bold } /* Literal.Number.Hex */
+body .mi { color: #2e8b57; font-weight: bold } /* Literal.Number.Integer */
+body .mo { color: #2e8b57; font-weight: bold } /* Literal.Number.Oct */
+body .sa { color: #800080 } /* Literal.String.Affix */
+body .sb { color: #800080 } /* Literal.String.Backtick */
+body .sc { color: #800080 } /* Literal.String.Char */
+body .dl { color: #800080 } /* Literal.String.Delimiter */
+body .sd { color: #800080 } /* Literal.String.Doc */
+body .s2 { color: #800080 } /* Literal.String.Double */
+body .se { color: #800080 } /* Literal.String.Escape */
+body .sh { color: #800080 } /* Literal.String.Heredoc */
+body .si { color: #800080 } /* Literal.String.Interpol */
+body .sx { color: #800080 } /* Literal.String.Other */
+body .sr { color: #800080 } /* Literal.String.Regex */
+body .s1 { color: #800080 } /* Literal.String.Single */
+body .ss { color: #800080 } /* Literal.String.Symbol */
+body .bp { color: #2c2cff } /* Name.Builtin.Pseudo */
+body .fm { font-weight: bold; font-style: italic } /* Name.Function.Magic */
+body .vc { color: #2c2cff; font-weight: bold } /* Name.Variable.Class */
+body .vg { color: #2c2cff; font-weight: bold } /* Name.Variable.Global */
+body .vi { color: #2c2cff; font-weight: bold } /* Name.Variable.Instance */
+body .vm { color: #2c2cff; font-weight: bold } /* Name.Variable.Magic */
+body .il { color: #2e8b57; font-weight: bold } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span></span><span class="cm">/**********************************************************************</span>
+<span class="cm"> * Program: example.sas</span>
+<span class="cm"> * Purpose: SAS Example for highlighting engines</span>
+<span class="cm"> **********************************************************************/</span><span class="k"></span>
+
+<span class="k">%put </span><span class="err">Started at </span><span class="nb">%sysfunc</span><span class="err">(</span><span class="nb">putn(%sysfunc</span><span class="err">(</span><span class="nb">datetime(</span><span class="err">)), datetime.));</span>
+<span class="k">options</span>
+    errors = <span class="m">20</span>  <span class="c">/* Maximum number of prints of repeat errors */</span>
+    fullstimer   <span class="c">/* Detailed timer after each step execution  */</span>
+;
+
+<span class="nb">%let</span> maindir = /path/to/maindir;
+<span class="nb">%let</span> outdir  = <span class="nv">&amp;maindir</span>/<span class="k">out</span>.;
+
+<span class="k">systask</span> command <span class="s">&quot;mkdir -p </span><span class="nv">&amp;outdir.</span><span class="s">&quot;</span> wait;
+<span class="k">libname</span> main <span class="s">&quot;</span><span class="nv">&amp;maindir.</span><span class="s">&quot;</span> access = readonly;
+<span class="k">libname</span> main <span class="s">&quot;%maindir.&quot;</span> access = readonly<span class="kr">;</span>
+
+<span class="kr">data </span>testing;
+    <span class="k">input</span> name $ number <span class="k">delimiter</span> = <span class="s">&quot;,&quot;</span>;
+<span class="k">    datalines;</span><span class="x"></span>
+<span class="x">    John,1</span>
+<span class="x">    Mary,2</span>
+<span class="x">    Jane,3</span>
+<span class="x">    ;</span>
+    <span class="k">if</span> number &gt; <span class="m">1</span> <span class="k">then</span> final = <span class="m">0</span>;
+    <span class="k">else</span> <span class="k">do</span>;
+        final = <span class="m">1</span>;
+    <span class="k">end</span><span class="kr">;</span>
+<span class="kr">run;</span>
+
+<span class="kr">proc sql </span><span class="nv">&amp;sqlopts</span>;
+<span class="k">create</span> <span class="k">table</span> waffles <span class="k">as</span>
+    <span class="k">select</span> *
+    <span class="k">from</span> testing<span class="kr">;</span>
+<span class="kr">quit;</span><span class="k"></span>
+
+<span class="k">%put </span><span class="g">NOTE: Hello;</span><span class="k"></span>
+<span class="k">%put </span><span class="g">NOTE- Hello;</span><span class="k"></span>
+
+<span class="k">%put </span><span class="ge">WARNING: Hello;</span><span class="k"></span>
+<span class="k">%put </span><span class="ge">WARNING- Hello;</span><span class="k"></span>
+
+<span class="k">%put </span><span class="gr">ERROR: Hello;</span><span class="k"></span>
+<span class="k">%put </span><span class="gr">ERROR- Hello;</span><span class="k"></span>
+<span class="k">%put </span><span class="err">Something </span><span class="gr">ERROR- Hello;</span>
+
+<span class="nb">%macro</span> testMacro(positional, named = value);<span class="k"></span>
+<span class="k">    %put </span><span class="err">positional = </span><span class="nv">&amp;positional.</span><span class="err">;</span>
+<span class="k">    %put </span><span class="err">named      = </span><span class="nb">log(</span><span class="nv">&amp;named.</span><span class="err">);</span>
+<span class="nb">%mend</span> testMacro;
+<span class="nf">%testMacro</span>(positional, named = value);
+
+<span class="k">dm</span> <span class="s">&#39;clear log output odsresults&#39;</span><span class="kr">;</span>
+
+<span class="kr">proc datasets </span>lib = work kill noprint<span class="kr">; quit;</span>
+<span class="k">libname</span> <span class="kc">_all_</span> clear<span class="kr">;</span>
+
+<span class="kr">data </span><span class="kc">_null_</span>;
+    <span class="k">set</span> sashelp<span class="m">.</span>macro(
+        <span class="k">keep</span>  = name
+        <span class="k">where</span> = (scope = <span class="s">&quot;global&quot;</span>);
+    );
+    <span class="k">call</span> symdel(name)<span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+</body>
+</html>

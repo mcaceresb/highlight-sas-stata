@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <style type="text/css">
+td.linenos { background-color: #f0f0f0; padding-right: 10px; }
+span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
+pre { line-height: 125%; }
+body .hll { background-color: #49483e }
+body  { background: #232629; color: #cccccc }
+body .c { color: #777777; font-style: italic } /* Comment */
+body .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+body .k { color: #7686bb; font-weight: bold } /* Keyword */
+body .ch { color: #777777; font-style: italic } /* Comment.Hashbang */
+body .cm { color: #777777; font-style: italic } /* Comment.Multiline */
+body .cp { color: #777777; font-style: italic } /* Comment.Preproc */
+body .cpf { color: #777777; font-style: italic } /* Comment.PreprocFile */
+body .c1 { color: #777777; font-style: italic } /* Comment.Single */
+body .cs { color: #777777; font-style: italic } /* Comment.Special */
+body .gp { color: #ffffff } /* Generic.Prompt */
+body .kc { color: #7686bb; font-weight: bold } /* Keyword.Constant */
+body .kd { color: #7686bb; font-weight: bold } /* Keyword.Declaration */
+body .kn { color: #7686bb; font-weight: bold } /* Keyword.Namespace */
+body .kp { color: #7686bb; font-weight: bold } /* Keyword.Pseudo */
+body .kr { color: #7686bb; font-weight: bold } /* Keyword.Reserved */
+body .kt { color: #7686bb; font-weight: bold } /* Keyword.Type */
+body .m { color: #4FB8CC } /* Literal.Number */
+body .s { color: #51cc99 } /* Literal.String */
+body .n-Format { color: #e2828e } /* Name.Format */
+body .nf { color: #6a6aff } /* Name.Function */
+body .nv { color: #7AB4DB; font-weight: bold } /* Name.Variable */
+body .w { color: #bbbbbb } /* Text.Whitespace */
+body .mb { color: #4FB8CC } /* Literal.Number.Bin */
+body .mf { color: #4FB8CC } /* Literal.Number.Float */
+body .mh { color: #4FB8CC } /* Literal.Number.Hex */
+body .mi { color: #4FB8CC } /* Literal.Number.Integer */
+body .mo { color: #4FB8CC } /* Literal.Number.Oct */
+body .sa { color: #51cc99 } /* Literal.String.Affix */
+body .sb { color: #51cc99 } /* Literal.String.Backtick */
+body .sc { color: #51cc99 } /* Literal.String.Char */
+body .dl { color: #51cc99 } /* Literal.String.Delimiter */
+body .sd { color: #51cc99 } /* Literal.String.Doc */
+body .s2 { color: #51cc99 } /* Literal.String.Double */
+body .se { color: #51cc99 } /* Literal.String.Escape */
+body .sh { color: #51cc99 } /* Literal.String.Heredoc */
+body .si { color: #51cc99 } /* Literal.String.Interpol */
+body .sx { color: #51cc99 } /* Literal.String.Other */
+body .sr { color: #51cc99 } /* Literal.String.Regex */
+body .s1 { color: #51cc99 } /* Literal.String.Single */
+body .ss { color: #51cc99 } /* Literal.String.Symbol */
+body .fm { color: #6a6aff } /* Name.Function.Magic */
+body .vc { color: #7AB4DB; font-weight: bold } /* Name.Variable.Class */
+body .vg { color: #BE646C; font-weight: bold } /* Name.Variable.Global */
+body .vi { color: #7AB4DB; font-weight: bold } /* Name.Variable.Instance */
+body .vm { color: #7AB4DB; font-weight: bold } /* Name.Variable.Magic */
+body .il { color: #4FB8CC } /* Literal.Number.Integer.Long */
+
+  </style>
+</head>
+<body>
+<h2></h2>
+
+<div class="highlight"><pre><span></span><span class="k">program</span> define excellentProgram<span class="k"></span>
+<span class="k">version</span> <span class="m">14.0</span>
+
+<span class="k">local</span> hi  = <span class="nv">`1&#39;</span><span class="k"></span>
+<span class="k">local</span> bye = <span class="nv">`2&#39;</span><span class="k"></span>
+<span class="k">local</span> yes = <span class="nf">ln</span>(<span class="nv">`hi&#39;</span>)
+
+<span class="c1">* This is a comment</span><span class="k"></span>
+<span class="k">set</span> obs <span class="nv">`= _N + 1&#39;</span><span class="k"></span>
+<span class="k">gen</span> neg = <span class="m">1</span> <span class="o">-</span> <span class="m">1</span> <span class="o">/</span> (<span class="m">1</span> <span class="o">+</span> <span class="nf">exp</span>(score))<span class="k"></span>
+<span class="k">bysort</span> group:<span class="k"> egen</span> pos =<span class="k"> sum</span>(<span class="nf">abs</span>(neg))
+
+<span class="cm">/*</span>
+<span class="cm"> * Multi line comments are pretty</span>
+<span class="cm"> * because they span many lines</span>
+<span class="cm"> */</span>
+
+<span class="k">reg</span> y x<span class="k"> if</span> bool <span class="o">==</span> <span class="m">1</span><span class="k"></span>
+<span class="k">xi</span>:<span class="k"> reg</span> y2 x i<span class="m">.</span>dummy <span class="c1">// This is another comment type</span>
+<span class="k">matrix list</span> <span class="nv">`r(table)&#39;</span><span class="k"></span>
+<span class="k">levelsof</span> x<span class="k"></span>
+<span class="k">disp</span> <span class="s">`&quot;</span><span class="nv">`r(levels)&#39;</span><span class="s">&quot;&#39;</span>
+
+<span class="k">di</span> <span class="s">&quot;This is a normal string with a </span><span class="nv">`local&#39;</span><span class="s"> </span><span class="vg">$global</span><span class="s"> </span><span class="vg">${global}</span><span class="s">&quot;</span><span class="k"></span>
+<span class="k">di</span> <span class="s">&quot;Nested: </span><span class="vg">$</span><span class="nv">`=expression&#39;</span><span class="vg">glo${glo</span><span class="nv">`loc`:extended macro&#39;al&#39;</span><span class="vg">bal}bal</span><span class="s">&quot;</span><span class="k"></span>
+<span class="k">di</span> <span class="s">&quot;Escape: </span><span class="se">\$</span><span class="s">100 or </span><span class="se">\`</span><span class="s">local</span><span class="se">\`</span><span class="s">&quot;</span><span class="k"></span>
+<span class="k">di</span> <span class="s">`&quot;This is a &quot;super string&quot; that takes on anything&quot;&#39;</span><span class="k"></span>
+<span class="k">di</span> <span class="s">&quot;string</span><span class="nv">`1&#39;</span><span class="s">two</span><span class="vg">${three}</span><span class="s">&quot;</span> bad <span class="s">`&quot;string &quot; &quot;&#39;</span> good <span class="s">`&quot;string &quot; &quot;&#39;</span>
+
+<span class="k">global</span> HelloThisIsAVeryLengthyGlobalYes <span class="m">23</span><span class="k"></span>
+<span class="k">local</span> RandomLocalAlsoVeryLongName ThisIsAVeryLengthyGlobal<span class="k"></span>
+<span class="k">disp</span> <span class="s">&quot;</span><span class="vg">${Hello</span><span class="nv">`RandomLocalAlsoVeryLongName&#39;</span><span class="vg">Yes}</span><span class="s">&quot;</span><span class="k"></span>
+<span class="k">disp</span> <span class="n n-Format">%21.0gc</span> _N
+
+<span class="c1">// This also works at line starts</span>
+<span class="k">adopath</span> <span class="o">++</span> <span class="s">&quot;</span><span class="vg">${lib}</span><span class="s">/code/ado/&quot;</span><span class="k"></span>
+<span class="k">cap adopath</span> <span class="o">-</span> SITE<span class="k"></span>
+<span class="k">cap adopath</span> <span class="o">-</span> PLUS
+<span class="cm">/*cap adopath - PERSONAL</span>
+<span class="cm">/*Nested*/</span>
+<span class="cm">cap adopath - OLDPLACE*/</span>
+
+<span class="k">forval</span> i = <span class="m">1</span> <span class="o">/</span> <span class="m">4</span>{
+<span class="k">  cap reg</span> y x<span class="nv">`i&#39;</span>, robust
+<span class="k">  if</span> <span class="nv">`i&#39;</span> <span class="o">==</span> <span class="m">2</span> {
+<span class="k">    local</span> c = _b[_cons]
+<span class="k">    local</span> b = _b[x<span class="nv">`i&#39;</span>]
+<span class="k">    local</span> x = <span class="nf">ln</span>(<span class="nv">`i&#39;</span>)
+  }
+}
+
+<span class="c1">* Something about how mata is really a second language within Stata</span><span class="k"></span>
+<span class="k">mata</span>:<span class="k"> mata</span> mlib index<span class="k"></span>
+<span class="k">end</span>
+</pre></div>
+</body>
+</html>

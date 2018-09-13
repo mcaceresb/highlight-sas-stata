@@ -22,9 +22,7 @@ convenience.
 
 This project started with me using `listings` and `minted` from LaTeX.
 Since I code in `vim`, I also wrote a short script to highlight
-code in LaTeX using the appropriate `syntax/<lang>.vim`. See
-[here](https://github.com/mcaceresb/dotvim/tree/master/bundle/latex-fenc
-ed-languages).
+code in LaTeX using the appropriate `syntax/<lang>.vim`. See [here](https://github.com/mcaceresb/dotvim/tree/master/bundle/latex-fenced-languages).
 
 If you code in Atom, I heartily recommend @kylebarron's excellent
 [language-stata](https://github.com/kylebarron/language-stata); he is

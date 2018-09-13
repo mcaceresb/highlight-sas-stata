@@ -82,8 +82,14 @@ class StataLexer(RegexLexer):
             (r'.', Comment.Single),
         ],
         'macros': [
+            (r'\$\{', Name.Variable.Global, 'macro-global-braces'),
             (r'\$', Name.Variable.Global, 'macro-global'),
             (r'`', Name.Variable, 'macro-local'),
+        ],
+        'macro-global-braces': [
+            (r'\$\{', Name.Variable.Global, '#push'),
+            (r'}', Name.Variable.Global, '#pop'),
+            (r'.', Name.Variable.Global),
         ],
         'macro-global': [
             (r'}', Name.Variable.Global, '#pop'),

@@ -135,10 +135,10 @@ class StataLexer(RegexLexer):
             (r'\$', Name.Variable.Global, 'macro-global-name'),
             (r'`', Name.Variable, 'macro-local'),
             (r'\w', Name.Variable.Global),  # fallback
-            (r'(?=[^\w])', Name.Variable.Global, '#pop'),
+            (r'(?!\w)', Name.Variable.Global, '#pop'),
         ],
         'macro-global-name': [
-            (r'\$\{', Name.Variable.Global, 'macro-global-nested', '#pop'),
+            (r'\$(\{|(?=[\$`]))', Name.Variable.Global, 'macro-global-nested', '#pop'),
             (r'\$', Name.Variable.Global, 'macro-global-name', '#pop'),
             (r'`', Name.Variable, 'macro-local', '#pop'),
             (r'\w{1,32}', Name.Variable.Global, '#pop'),
@@ -147,7 +147,7 @@ class StataLexer(RegexLexer):
         'keywords': [
             (words(builtins_functions, prefix = r'\b', suffix = r'(?=\()'),
              Name.Function),
-            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'(?=\b)'),
+            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'\b'),
              Keyword),
         ],
         # http://www.stata.com/help.cgi?operators

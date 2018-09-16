@@ -14,7 +14,8 @@ from pygments.lexer import RegexLexer, include, words
 from pygments.token import Comment, Keyword, Name, Number, \
     String, Text, Operator
 
-from pygments.lexers._stata_builtins import builtins_base, builtins_functions
+from pygments.lexers._stata_builtins import builtins_base, \
+    builtins_functions, builtins_special
 
 __all__ = ['StataLexer']
 
@@ -147,7 +148,14 @@ class StataLexer(RegexLexer):
         'keywords': [
             (words(builtins_functions, prefix = r'\b', suffix = r'(?=\()'),
              Name.Function),
-            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'\b'),
+            (words(builtins_base,
+                   prefix = r'(^|:|\|\|)\s*'
+                            r'((cap(t|tu|tur|ture)?'
+                            r'|qui(e|et|etl|etly)?'
+                            r'|n(o|oi|ois|oisi|oisil|oisily)?)\s+)*',
+                   suffix = r'\b'),
+             Keyword),
+            (words(builtins_special, prefix = r'\b', suffix = r'\b'),
              Keyword),
         ],
         # http://www.stata.com/help.cgi?operators

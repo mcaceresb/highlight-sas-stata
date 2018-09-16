@@ -10,8 +10,12 @@
 """
 
 
+builtins_special = (
+    "if", "in", "using", "replace", "by", "gen", "generate"
+)
+
 builtins_base = (
-    "if", "else", "in", "foreach", "for", "forv", "forva",
+    "if", "else", "else\s+if", "in", "foreach", "for", "forv", "forva",
     "forval", "forvalu", "forvalue", "forvalues", "by", "bys",
     "bysort", "quietly", "qui", "about", "ac",
     "ac_7", "acprplot", "acprplot_7", "adjust", "ado", "adopath",
@@ -415,5 +419,3 @@ builtins_functions = (
     "weekly", "wofd", "word", "wordcount", "year", "yearly",
     "yh", "ym", "yofd", "yq", "yw"
 )
-
-

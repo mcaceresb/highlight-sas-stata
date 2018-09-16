@@ -161,7 +161,7 @@ class StataLexer(RegexLexer):
         # http://www.stata.com/help.cgi?operators
         'operators': [
             (r'-|==|<=|>=|<|>|&|!=', Operator),
-            (r'\*|\+|\^|/|!|~|==|~=', Operator)
+            (r'\*|\+|\^|/|!|~|=|~=', Operator)
         ],
         # Stata numbers
         'numbers': [

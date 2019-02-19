@@ -14,8 +14,7 @@ from pygments.lexer import RegexLexer, include, words
 from pygments.token import Comment, Keyword, Name, Number, \
     String, Text, Operator
 
-from pygments.lexers._stata_builtins import builtins_base, \
-    builtins_functions, builtins_special
+from pygments.lexers._stata_builtins import builtins_base, builtins_functions
 
 __all__ = ['StataLexer']
 
@@ -35,7 +34,7 @@ class StataLexer(RegexLexer):
     aliases   = ['stata', 'do']
     filenames = ['*.do', '*.ado']
     mimetypes = ['text/x-stata', 'text/stata', 'application/x-stata']
-    flags = re.MULTILINE | re.DOTALL
+    flags     = re.MULTILINE | re.DOTALL
 
     tokens = {
         'root': [
@@ -148,20 +147,13 @@ class StataLexer(RegexLexer):
         'keywords': [
             (words(builtins_functions, prefix = r'\b', suffix = r'(?=\()'),
              Name.Function),
-            (words(builtins_base,
-                   prefix = r'(^|:|\|\|)\s*'
-                            r'((cap(t|tu|tur|ture)?'
-                            r'|qui(e|et|etl|etly)?'
-                            r'|n(o|oi|ois|oisi|oisil|oisily)?)\s+)*',
-                   suffix = r'\b'),
-             Keyword),
-            (words(builtins_special, prefix = r'\b', suffix = r'\b'),
+            (words(builtins_base, prefix = r'(^\s*|\s)', suffix = r'\b'),
              Keyword),
         ],
         # http://www.stata.com/help.cgi?operators
         'operators': [
             (r'-|==|<=|>=|<|>|&|!=', Operator),
-            (r'\*|\+|\^|/|!|~|=|~=', Operator)
+            (r'\*|\+|\^|/|!|~|==|~=', Operator)
         ],
         # Stata numbers
         'numbers': [
@@ -171,9 +163,9 @@ class StataLexer(RegexLexer):
         ],
         # Stata formats
         'format': [
-            (r'%-?\d{1,2}(\.\d{1,2})?[gfe]c?', Name.Format),
-            (r'%(21x|16H|16L|8H|8L)', Name.Format),
-            (r'%-?(tc|tC|td|tw|tm|tq|th|ty|tg).{0,32}', Name.Format),
-            (r'%[-~]?\d{1,4}s', Name.Format),
+            (r'%-?\d{1,2}(\.\d{1,2})?[gfe]c?', Name.Other),
+            (r'%(21x|16H|16L|8H|8L)', Name.Other),
+            (r'%-?(tc|tC|td|tw|tm|tq|th|ty|tg)\S{0,32}', Name.Other),
+            (r'%[-~]?\d{1,4}s', Name.Other),
         ]
     }
